@@ -1,40 +1,273 @@
-\documentclass[name=Nihar\ Shailesh\ Joshi, niharid=njoshi27, course=CS 401, num=4]{main}
+\documentclass[name=Nihar\ Shailesh\ Joshi, niharid=njoshi27, course=CS 401, num=1 Part 1]{main}
 
 \usepackage{main}
 
 \begin{document}
-    
+
 \problem{1a}
 
 \begin{question}
     True or false? In every instance of the Stable Matching Problem, there is a 
-    stable matching containing a pair \textit{(m,w)} such that \textit{m} is 
+    stable matching containing a pair \textit{(m, w)} such that \textit{m} is 
     ranked first on the preference list of \textit{w} and \textit{w} is ranked 
     first on the preference list of \textit{m}.
     $ $\newline
 \end{question}
+
 \begin{solution}
-    Let us approach this problem by considering a group containing 2 men 
-    \textit{m\textsubscript{1}} \& \textit{m\textsubscript{2}} and 2 women
-    \textit{w\textsubscript{1}} \& \textit{w\textsubscript{2}}. 
-    $ $\newline
-    We will first see whether the above claim is possible to reproduce using 
-    a specific set of preferences and then disprove it with another altered 
-    set of preferences.
-    $ $\newline
-    Let the preferences of \textit{m\textsubscript{1}} and 
-    \textit{m\textsubscript{2}} be as follows: 
+    \textbf{False.}
+    Let us consider a group containing 3 men (\textit{m\textsubscript{1}}, 
+    \textit{m\textsubscript{2}}, \textit{m\textsubscript{3}}) and 3 women 
+    (\textit{w\textsubscript{1}}, \textit{w\textsubscript{2}}, 
+    \textit{w\textsubscript{3}}). 
+    \\[0.2in]
+    Let the preferences of \textit{m\textsubscript{1}}, 
+    \textit{m\textsubscript{2}} and \textit{m\textsubscript{3}} be as follows: 
     \begin{center}
-        \begin{tabular}{ | l | c | r | }
+        \begin{tabular}{ | c | c | c | c | }
             \hline
-            & 1\textsuperscript{st} & 2\textsuperscript{nd} \\ \hline
-            m\textsubscript{1} & w\textsubscript{1} & w\textsubscript{2} \\ \hline
-            m\textsubscript{2} & w\textsubscript{1} & w\textsubscript{2} \\
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            m\textsubscript{1} & w\textsubscript{2} & w\textsubscript{3} & w\textsubscript{1} \\ \hline
+            m\textsubscript{2} & w\textsubscript{2} & w\textsubscript{3} & w\textsubscript{1} \\ \hline
+            m\textsubscript{3} & w\textsubscript{1} & w\textsubscript{3} & w\textsubscript{2} \\
             \hline
         \end{tabular}
     \end{center}
+    Let the preferences of \textit{w\textsubscript{1}}, 
+    \textit{w\textsubscript{2}} and \textit{w\textsubscript{3}} be as follows: 
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            w\textsubscript{1} & m\textsubscript{2} & m\textsubscript{1} & m\textsubscript{3} \\ \hline
+            w\textsubscript{2} & m\textsubscript{3} & m\textsubscript{2} & m\textsubscript{1} \\ \hline
+            w\textsubscript{3} & m\textsubscript{2} & m\textsubscript{1} & m\textsubscript{3} \\
+            \hline
+        \end{tabular}
+    \end{center}
+    If we run the stable matching on the above set of men and women, we get the 
+    following matches (stable pairs): 
+    \begin{center}
+        \begin{tabular}{ c c }
+            % \hline
+            (m\textsubscript{1} & w\textsubscript{3}) \\
+            (m\textsubscript{2} & w\textsubscript{2}) \\
+            (m\textsubscript{3} & w\textsubscript{1}) \\
+            % \hline
+        \end{tabular}
+    \end{center}
+    As we see, in this particular outcome, there is no pair \textit{(m,w)} 
+    such that \textit{m} and \textit{w} are ranked first on each other's 
+    preference lists. 
+    \\[0.2in]
+    In fact, no matter which man we start the algorithm from, we do not find 
+    the claim to be true.
+    \begin{itemize}
+        \item For \textit{m\textsubscript{1}} to be paired with his top 
+        preference, he would have to be paired with 
+        \textit{w\textsubscript{2}}. However, the top preference of 
+        \textit{w\textsubscript{2}} is \textit{m\textsubscript{3}}.
+        \item Similarly, in the case of \textit{m\textsubscript{2}}, even 
+        though his top preference is \textit{w\textsubscript{2}}, the top 
+        preference of \textit{w\textsubscript{2}} is 
+        \textit{m\textsubscript{3}}.
+        \item Lastly, for \textit{m\textsubscript{3}}, even though his top 
+        preference is \textit{w\textsubscript{1}}, the top preference of 
+        \textit{w\textsubscript{1}} is \textit{m\textsubscript{2}}.
+    \end{itemize}
+    Therefore, we cannot say that in every instance of the Stable Matching 
+    Problem, there is a stable matching containing a pair \textit{(m,w)} such 
+    that \textit{m} is ranked first on the preference list of \textit{w} and 
+    \textit{w} is ranked first on the preference list of \textit{m}.
 \end{solution}
 
-\separator
+\begin{center}
+    \rule{1in}{0.5pt}
+\end{center}
+
+\problem{1b}
+
+\begin{question}
+    True or false? Consider an instance of the Stable Matching Problem in which 
+    there exists a man \textit{m} and a woman \textit{w} such that \textit{m} 
+    is ranked first on the preference list of \textit{w} and \textit{w} 
+    is ranked first on the preference list of \textit{m}. Then in every stable 
+    matching \textit{S} for this instance, the pair \textit{(m, w)} belongs to 
+    \textit{S}.
+    $ $\newline
+\end{question}
+
+\begin{solution}
+    \textbf{True.} Proof by contradiction: 
+    \\[0.2in]
+    Let us consider a group containing 3 men (\textit{m\textsubscript{1}}, 
+    \textit{m\textsubscript{2}}, \textit{m\textsubscript{3}}) and 3 women 
+    (\textit{w\textsubscript{1}}, \textit{w\textsubscript{2}}, 
+    \textit{w\textsubscript{3}}). 
+    \\[0.2in]
+    Let the preferences of \textit{m\textsubscript{1}}, 
+    \textit{m\textsubscript{2}} and \textit{m\textsubscript{3}} be as follows: 
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            m\textsubscript{1} & w\textsubscript{2} & w\textsubscript{3} & w\textsubscript{1} \\ \hline
+            m\textsubscript{2} & w\textsubscript{3} & w\textsubscript{1} & w\textsubscript{2} \\ \hline
+            m\textsubscript{3} & w\textsubscript{1} & w\textsubscript{2} & w\textsubscript{3} \\
+            \hline
+        \end{tabular}
+    \end{center}
+    Let the preferences of \textit{w\textsubscript{1}}, 
+    \textit{w\textsubscript{2}} and \textit{w\textsubscript{3}} be as follows: 
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            w\textsubscript{1} & m\textsubscript{1} & m\textsubscript{2} & m\textsubscript{3} \\ \hline
+            w\textsubscript{2} & m\textsubscript{3} & m\textsubscript{1} & m\textsubscript{2} \\ \hline
+            w\textsubscript{3} & m\textsubscript{2} & m\textsubscript{1} & m\textsubscript{3} \\
+            \hline
+        \end{tabular}
+    \end{center}
+    Here, we see that both \textit{m\textsubscript{2}} and 
+    \textit{w\textsubscript{3}} are ranked first on each other's preference 
+    lists. 
+    \\[0.2in]
+    Now, let us assume that there exists a stable matching 
+    \textit{S\textsuperscript{'}} such that \textit{m\textsubscript{2}} and 
+    \textit{w\textsubscript{3}} are \textbf{not} paired with each other. 
+    \\[0.2in]
+    We know two facts about the Stable Matching algorithm:
+    \begin{itemize}
+        \item Men will only propose to women \textbf{in the order of their 
+        preference list.} Therefore, in the case of man 
+        \textit{m\textsubscript{2}}, proposals will only happen in the order 
+        \textit{w\textsubscript{3}} $\rightarrow$ \textit{w\textsubscript{1}} 
+        $\rightarrow$ \textit{m\textsubscript{2}}.
+        \item Every man will get a chance to propose. Therefore, 
+        \textit{m\textsubscript{2}} will surely get a chance to propose to 
+        \textit{w\textsubscript{3}} - and as \textit{m\textsubscript{2}} is the 
+        top preference of \textit{w\textsubscript{3}}, she will always match 
+        with him - as \textbf{women are never left unmatched, they always 
+        trade up.}
+    \end{itemize}
+    As a result, we cannot find a scenario where \textit{m\textsubscript{2}} 
+    and \textit{w\textsubscript{3}} do not end up together. \textbf{This fact 
+    remains true regardless of which group does the proposals.}
+    \\[0.2in]
+    Even if, for the sake of the argument, we assume that there does exist a 
+    matching where \textit{m\textsubscript{2}} and \textit{w\textsubscript{3}} 
+    do not end up together, we can see that they would form an 
+    \textbf{unstable pair} - that is, they would both end up in matches where 
+    they prefer each other over their current partners.
+    \\[0.2in]
+    \textbf{This contradicts the definition of Stable Matching.}
+    \\[0.2in]
+    Therefore, in every stable matching \textit{S} for a man \textit{m} and a 
+    woman \textit{w}, such that \textit{m} is ranked first on the preference 
+    list of \textit{w} and \textit{w} is ranked first on the preference list of 
+    \textit{m}, the pair \textit{(m, w)} belongs to belongs \textit{S}.
+\end{solution}
+
+\begin{center}
+    \rule{1in}{0.5pt}
+\end{center}
+
+\problem{2 - Option b}
+
+\begin{question}
+    Give an example of a set of preference lists for which there is a switch 
+    that would improve the partner of a woman who switched preferences.
+    $ $\newline
+\end{question}
+
+\begin{solution}
+    Let us consider a group of 3 men \textit{A, B, C} and 3 women 
+    \textit{X, Y, Z}.
+    \\[0.2in]
+    Let their respective preferences be as follows:
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            A & X & Y & Z \\ \hline
+            B & Y & X & Z \\ \hline
+            C & X & Y & Z \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            X & B & A & C \\ \hline
+            Y & A & B & C \\ \hline
+            Z & A & B & C \\
+            \hline
+        \end{tabular}
+    \end{center}
+    After we run the Gale-Shapely algorithm on the above set of participants, 
+    we get the following stable matching: 
+    \begin{center}
+        \begin{tabular}{ c c }
+            % \hline
+            (A & X) \\
+            (B & Y) \\
+            (C & Z) \\
+            % \hline
+        \end{tabular}
+    \end{center}
+    If we take a look at woman \textit{X}, we see that her top choice is man 
+    \textit{B} but she ends up with man \textit{A}.
+    \\[0.2in]
+    Now, suppose woman \textit{X} lies about her preferences and says that her 
+    preference order is \textbf{\textit{B} $\rightarrow$ \textit{C} 
+    $\rightarrow$ \textit{A}} instead. Now we have the new, updated list of 
+    preferences as follows:
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            A & X & Y & Z \\ \hline
+            B & Y & X & Z \\ \hline
+            C & X & Y & Z \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \begin{center}
+        \begin{tabular}{ | c | c | c | c | }
+            \hline
+            & 1\textsuperscript{st} & 2\textsuperscript{nd} & 3\textsuperscript{rd} \\ \hline
+            \textbf{X} & \textbf{B} & \textbf{C} & \textbf{A} \\ \hline
+            Y & A & B & C \\ \hline
+            Z & A & B & C \\
+            \hline
+        \end{tabular}
+    \end{center}
+    When we run the Gale-Shapely algorithm on this new set of preferences, we 
+    get the following stable matching:
+    \begin{center}
+        \begin{tabular}{ c c }
+            % \hline
+            (A & Y) \\
+            (\textbf{B} & \textbf{X}) \\
+            (C & Z) \\
+            % \hline
+        \end{tabular}
+    \end{center}
+    In this scenario, we see that \textbf{woman \textit{X} actually ends up 
+    with man \textit{B}, her first preference.} By lying, woman \textit{X} has 
+    actually hoodwinked the algorithm!
+    \\[0.2in]
+    Therefore, this is an example where a switch in preferences improves the 
+    partner of a woman.
+    \\[0.2in]
+    Consequently, we can also conclude that \textbf{yes, a man or a woman can 
+    end up better off by lying about his or her preferences.}
+\end{solution}
+
+\begin{center}
+    \rule{1in}{0.5pt}
+\end{center}
 
 \end{document}

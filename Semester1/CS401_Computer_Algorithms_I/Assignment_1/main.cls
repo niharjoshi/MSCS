@@ -31,7 +31,7 @@
 
 % Set default values if optional options are undefined
 \@ifundefined{emaildomain}{ \newcommand{\emaildomain}{uic.edu} }{}
-\@ifundefined{assignmenttype}{ \newcommand{\assignmenttype}{Homework} }{}
+\@ifundefined{assignmenttype}{ \newcommand{\assignmenttype}{Assignment} }{}
 \@ifundefined{probword}{ \newcommand{\probword}{Problem} }{}
 
 % Define commands depending on components passed as key/values or default options
