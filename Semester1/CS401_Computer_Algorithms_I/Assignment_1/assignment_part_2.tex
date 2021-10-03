@@ -1,0 +1,109 @@
+\documentclass[name=Nihar\ Shailesh\ Joshi, niharid=njoshi27, course=CS 401, num=1 Part 2]{main}
+
+\usepackage{main}
+
+\DeclareUnicodeCharacter{2212}{-}
+
+\begin{document}
+
+\problem{1}
+
+\begin{question}
+    Give an algorithm to detect whether a given undirected graph contains a 
+    cycle. If the graph contains a cycle, then your algorithm should output one 
+    (it need not output all cycles in the graph, just one of them). The running 
+    time of your algorithm should be O(m+n)for a graph with n nodes and m edges.
+    $ $\newline
+\end{question}
+
+\begin{solution}
+    Let us consider an undirected, connected graph (or an undirected graph with 
+    some connected components).
+    \\[0.2in]
+    We can use Depth First Search to detect a cycle in an undirected graph. In 
+    order to do this, we need to try and convert our graph into a tree - more 
+    specifically, a DFS tree, as we are using DFS for our graph traversal.
+    \\[0.2in]
+    If at any point during the creation of the DFS tree from our graph we run 
+    into a \textbf{back edge (an edge that connects a node to itself or one of its 
+    ancestors)}, we can conclude that a graph contains a cycle.
+    \\[0.2in]
+    The algorithm to detect a cycle in an undirected graph can be defined as 
+    follows:
+    \begin{algorithm}[H]
+        \caption{Detect a cycle in an undirected graph}
+        \begin{algorithmic} 
+            \ENSURE The graph $G$ has been created using the given number of edges and vertices
+            \ENSURE The graph $G$ contains connected components
+            \STATE Perform DFS on the graph $G$ and output the DFS tree $T$
+            \IF {All the edges of $G$ and present in $T$}
+            \STATE Graph does not contain a cycle
+            \ELSE
+            \STATE Let $(u, v)$ be an edge that is present in $G$ but not in $T$
+            \STATE Here, $(u, v)$ is a back edge in $T$
+            \STATE In $T$, traverse the path $P$ from $v$ to $u$
+            \STATE The cycle $C$ is equal to $P \cup {(u, v)}$
+            \STATE Return the cycle $C$
+            \ENDIF
+        \end{algorithmic}
+    \end{algorithm}
+    As we are using DFS to detect the cycle in our graph, we should have a 
+    \textbf{running time of O(m + n)} for a graph with m edges and n nodes.
+\end{solution}
+
+\begin{center}
+    \rule{1in}{0.5pt}
+\end{center}
+
+\problem{2}
+
+\begin{question}
+    Suppose that an n-node undirected graph G = (V, E) contains two nodes s and 
+    t such that the distance between s and t is strictly greater than n/2. Show 
+    that there must exist some node v, not equal to either s or t, such that 
+    deleting v from G destroys all s−t paths. (In other words, the graph 
+    obtained from G by deleting v contains no path from s to t.) Give an 
+    algorithm with running time O(m + n) to find such a node v.
+    $ $\newline
+\end{question}
+
+\begin{solution}
+    Let us traverse the graph G using Breadth First Search starting from node 
+    s. Let node s be present in layer L\textsubscript{0}, and node t be present 
+    in the layer L\textsubscript{d}. According to the problem statement, we 
+    know that d $\geq$ n/2.
+    \\[0.2in]
+    Now, let us consider the layers that the nodes s and t are \textbf{not} 
+    present in. Assume that one of these layers L\textsubscript{1}, 
+    L\textsubscript{2}, ..., L\textsubscript{d-1} contains only a single node. 
+    The reasoning behind this assumption is that if each of these layers had 
+    even just 2 nodes, they would contain at least 2(n/2) nodes - which is n.
+    \\[0.2in]
+    But we know that G only has n nodes and neither s not t appear in the 
+    aformentioned layers. Therefore, there has to be some layer 
+    L\textsubscript{x} containing only 1 node v.
+    \\[0.2in]
+    Next, let us assume that the removal of this node v would destroy all 
+    paths from s to t. Let us consider the set of layers X = 
+    {L\textsubscript{0}, L\textsubscript{1}, ..., L\textsubscript{x-1}}, that 
+    is, all the layers before L\textsubscript{x}. Node s is part of layer 
+    L\textsubscript{0}. Node t is not a part of the above set of layers.
+    \\[0.2in]
+    Since we have considered all the layers before L\textsubscript{x}, by the 
+    properties of BFS, any edge that emerges X must be a part of 
+    L\textsubscript{x}. \textbf{Therefore, each and every path from s to t 
+    must emerge from X and by consequence, must contain a node in 
+    L\textsubscript{x}.}
+    \\[0.2in]
+    \textbf{However, the only node in L\textsubscript{x} is v.}
+    \\[0.2in]
+    In conclusion, we can confidently say that that there must exist some node 
+    v, not equal to either s or t, such that deleting v from G destroys all s−t 
+    paths.
+\end{solution}
+
+\begin{center}
+    \rule{1in}{0.5pt}
+\end{center}
+
+\end{document}
